@@ -2,6 +2,7 @@
   "name": "digital-self-assistant",
   "version": "0.1.0",
   "private": true,
+  "author": "Johnny Magrippis <j@magrippis.com>",
   "devDependencies": {
     "babel-eslint": "9.0",
     "eslint": "5.6.0",
@@ -24,5 +25,6 @@
       "prettier --write",
       "git add"
     ]
-  }
+  },
+  "license": "MIT"
 }

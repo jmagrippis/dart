@@ -7,5 +7,6 @@
   },
   "scripts": {
     "test": "cypress run"
-  }
+  },
+  "license": "MIT"
 }

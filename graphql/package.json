@@ -1,0 +1,24 @@
+{
+  "name": "digital-self-assistant-server",
+  "version": "0.1.0",
+  "description": "The graphql server for the digital self assistant",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "node ./build/index.js",
+    "dev": "PORT=3001 nodemon ./build/index.js",
+    "build": "NODE_ENV=production tsc"
+  },
+  "dependencies": {
+    "apollo-server": "^2.2.0",
+    "dotenv": "^6.1.0",
+    "graphql": "^14.0.2"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^4.0.3",
+    "@types/graphql": "^14.0.3",
+    "@types/zen-observable": "^0.8.0",
+    "nodemon": "^1.18.5",
+    "typescript": "^3.1.6"
+  },
+  "license": "MIT"
+}
