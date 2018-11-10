@@ -26,5 +26,6 @@
       "git add"
     ]
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }

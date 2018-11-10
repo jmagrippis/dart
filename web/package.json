@@ -6,6 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=node",
+    "deploy": "yarn build && gcloud app deploy --project=digital-auto-response-tool",
     "eject": "react-scripts eject"
   },
   "dependencies": {

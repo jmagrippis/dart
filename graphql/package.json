@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./build/index.js",
     "dev": "PORT=3001 nodemon ./build/index.js",
-    "build": "NODE_ENV=production tsc"
+    "build": "NODE_ENV=production tsc",
+    "deploy": "yarn build && gcloud app deploy --project=digital-auto-response-tool"
   },
   "dependencies": {
     "apollo-server": "^2.2.0",
