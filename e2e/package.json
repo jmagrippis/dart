@@ -1,0 +1,11 @@
+{
+  "name": "digital-self-assistant-e2e-tests",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "cypress": "^3.1.1"
+  },
+  "scripts": {
+    "test": "cypress run"
+  }
+}
