@@ -10,12 +10,16 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "apollo-boost": "^0.1.20",
+    "graphql": "^14.0.2",
     "react": "^16.6.1",
+    "react-apollo": "^2.2.4",
     "react-dom": "^16.6.1",
     "react-scripts": "2.1.1",
     "reset-css": "^4.0.1"
   },
   "devDependencies": {
+    "@types/graphql": "^14.0.3",
     "@types/jest": "^23.3.9",
     "@types/node": "^10.12.5",
     "@types/react": "^16.7.1",
