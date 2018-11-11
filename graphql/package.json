@@ -1,5 +1,5 @@
 {
-  "name": "digital-self-assistant-server",
+  "name": "dart-server",
   "version": "0.1.0",
   "description": "The graphql server for the digital self assistant",
   "main": "build/index.js",

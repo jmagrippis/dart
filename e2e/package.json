@@ -1,5 +1,5 @@
 {
-  "name": "digital-self-assistant-e2e-tests",
+  "name": "dart-e2e-tests",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {

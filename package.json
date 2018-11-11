@@ -1,5 +1,5 @@
 {
-  "name": "digital-self-assistant",
+  "name": "dart",
   "version": "0.1.0",
   "private": true,
   "author": "Johnny Magrippis <j@magrippis.com>",
@@ -27,5 +27,8 @@
     ]
   },
   "license": "MIT",
-  "dependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmagrippis/dart"
+  }
 }
