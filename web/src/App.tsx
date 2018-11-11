@@ -3,15 +3,15 @@ import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 import { apolloClient } from './apolloClient'
-import { Home } from './Home/Home'
-import { Profile } from './Profile/Profile'
+import { LazyHome, LazyProfile, LazyUser } from './routes'
 
 export const App = () => (
   <ApolloProvider client={apolloClient}>
     <BrowserRouter>
       <Fragment>
-        <Route path="/" exact component={Home} />
-        <Route path="/me" exact component={Profile} />
+        <Route path="/" exact component={LazyHome} />
+        <Route path="/me" exact component={LazyProfile} />
+        <Route path="/u/:username" component={LazyUser} />
       </Fragment>
     </BrowserRouter>
   </ApolloProvider>

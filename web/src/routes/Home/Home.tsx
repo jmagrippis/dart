@@ -17,3 +17,5 @@ export class Home extends PureComponent<RouteComponentProps> {
     )
   }
 }
+
+export default Home

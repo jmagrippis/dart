@@ -4,9 +4,11 @@ export const typeDefs = gql`
   type User {
     id: ID!
     email: String!
+    username: String!
+    displayName: String!
   }
 
   type Query {
-    user(id: String!): User
+    findUserByUsername(username: String!): User
   }
 `
