@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { ApolloProvider } from 'react-apollo'
+import { BrowserRouter, Route } from 'react-router-dom'
 
 import { apolloClient } from './apolloClient'
+import { Home } from './Home/Home'
+import { Profile } from './Profile/Profile'
 
 export const App = () => (
   <ApolloProvider client={apolloClient}>
-    <div>Test deploy please ignore</div>
+    <BrowserRouter>
+      <Fragment>
+        <Route path="/" exact component={Home} />
+        <Route path="/me" exact component={Profile} />
+      </Fragment>
+    </BrowserRouter>
   </ApolloProvider>
 )
