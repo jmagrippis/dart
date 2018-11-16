@@ -5,6 +5,7 @@ import DocumentTitle from 'react-document-title'
 import { RouteComponentProps } from 'react-router'
 
 import { Loading } from '../../Loading/Loading'
+import { Conversation } from './Conversation/Conversation'
 
 const FIND_USER_BY_USER_NAME = gql`
   query FindUserByUsername($username: String!) {
@@ -37,7 +38,7 @@ export const User = ({
 
       return (
         <DocumentTitle title={`DART - ${displayName}`}>
-          <div>{displayName}</div>
+          <Conversation username={username} />
         </DocumentTitle>
       )
     }}
