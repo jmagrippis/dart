@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import store from 'store2'
 import uuid from 'uuid/v4'
 
 import { Input } from './Input/Input'
@@ -28,11 +29,11 @@ export const CONVERSATION = gql`
 `
 
 const getOrGenerateUserId = () => {
-  const existingUserId = localStorage.getItem('interviewerId')
+  const existingUserId = store('interviewerId')
   if (existingUserId) return existingUserId
 
   const interviewerId = uuid()
-  localStorage.setItem('interviewerId', interviewerId)
+  store('interviewerId', interviewerId)
   return interviewerId
 }
 
