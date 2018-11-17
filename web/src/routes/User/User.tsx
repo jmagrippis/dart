@@ -4,8 +4,14 @@ import { Query } from 'react-apollo'
 import DocumentTitle from 'react-document-title'
 import { RouteComponentProps } from 'react-router'
 
-import { Loading } from '../../Loading/Loading'
 import { Conversation } from './Conversation/Conversation'
+import { Loading } from '../../Loading/Loading'
+import { FindUserByUsername } from '../../types'
+
+class FindUserByUserNameQuery extends Query<
+  FindUserByUsername.Query,
+  FindUserByUsername.Variables
+> {}
 
 const FIND_USER_BY_USER_NAME = gql`
   query FindUserByUsername($username: String!) {
@@ -28,10 +34,13 @@ export const User = ({
     params: { username }
   }
 }: Props) => (
-  <Query query={FIND_USER_BY_USER_NAME} variables={{ username }}>
+  <FindUserByUserNameQuery
+    query={FIND_USER_BY_USER_NAME}
+    variables={{ username }}
+  >
     {({ loading, error, data }) => {
       if (loading) return <Loading />
-      if (error) return <div>Error :(</div>
+      if (error || !data) return <div>Error :(</div>
 
       const { findUserByUsername } = data
 
@@ -51,7 +60,7 @@ export const User = ({
         </DocumentTitle>
       )
     }}
-  </Query>
+  </FindUserByUserNameQuery>
 )
 
 export default User

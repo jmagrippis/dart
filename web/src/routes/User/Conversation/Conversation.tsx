@@ -2,32 +2,15 @@ import React, { PureComponent } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import uuid from 'uuid/v4'
-import { Loading } from '../../../Loading/Loading'
+
 import { Input } from './Input/Input'
+import { Loading } from '../../../Loading/Loading'
+import { Conversation as ConversationTypes } from '../../../types'
 
-export interface Message {
-  id: string
-  content: string
-  sender: {
-    id: string
-  }
-}
-
-export interface Conversation {
-  id: string
-  messages: Message[]
-}
-
-interface Data {
-  conversation: Conversation
-}
-
-interface Variables {
-  subjectId: string
-  interviewerId?: string
-}
-
-class ConversationQuery extends Query<Data, Variables> {}
+class ConversationQuery extends Query<
+  ConversationTypes.Query,
+  ConversationTypes.Variables
+> {}
 
 export const CONVERSATION = gql`
   query Conversation($subjectId: ID!, $interviewerId: ID) {
@@ -84,7 +67,7 @@ export class Conversation extends PureComponent<Props, State> {
           return (
             <div>
               <ul>
-                {messages.map((message: Message) => (
+                {messages.map((message: ConversationTypes.Messages) => (
                   <li
                     key={message.id}
                     data-test={

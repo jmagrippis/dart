@@ -1,20 +1,15 @@
 import React, { PureComponent, createRef } from 'react'
 import gql from 'graphql-tag'
 import { Mutation, MutationFn } from 'react-apollo'
-import { CONVERSATION, Conversation, Message } from '../Conversation'
 import { MutationUpdaterFn } from 'apollo-boost'
 
-interface Data {
-  addMessage: Message
-}
+import { CONVERSATION } from '../Conversation'
+import { AddMessage, Conversation } from '../../../../types'
 
-interface Variables {
-  content: string
-  conversationId: string
-  interviewerId?: string
-}
-
-class AddMessageMutation extends Mutation<Data, Variables> {}
+class AddMessageMutation extends Mutation<
+  AddMessage.Mutation,
+  AddMessage.Variables
+> {}
 
 const ADD_MESSAGE = gql`
   mutation AddMessage(
@@ -45,11 +40,13 @@ interface Props {
 export class Input extends PureComponent<Props> {
   input = createRef<HTMLInputElement>()
 
-  update: MutationUpdaterFn<Data> = (cache, { data }) => {
+  update: MutationUpdaterFn<AddMessage.Mutation> = (cache, { data }) => {
     if (!data) return
     const { interviewerId, subjectId } = this.props
     const variables = { interviewerId, subjectId }
-    const cachedData: { conversation: Conversation } | null = cache.readQuery({
+    const cachedData: {
+      conversation: Conversation.Conversation
+    } | null = cache.readQuery({
       query: CONVERSATION,
       variables
     })
@@ -72,9 +69,9 @@ export class Input extends PureComponent<Props> {
     })
   }
 
-  onSubmit = (addMessage: MutationFn<Data, Variables>) => (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  onSubmit = (
+    addMessage: MutationFn<AddMessage.Mutation, AddMessage.Variables>
+  ) => (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const input = this.input.current
     if (!input) return

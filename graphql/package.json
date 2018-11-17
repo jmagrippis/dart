@@ -7,7 +7,6 @@
     "start": "node -r dotenv/config ./build/index.js",
     "dev": "PORT=3001 ./startDev.sh",
     "build": "NODE_ENV=production tsc",
-    "codegen": "gql-gen",
     "deploy": "yarn build && gcloud app deploy --project=digital-auto-response-tool"
   },
   "dependencies": {
@@ -22,9 +21,6 @@
     "@types/graphql": "^14.0.3",
     "@types/pg": "^7.4.11",
     "@types/zen-observable": "^0.8.0",
-    "graphql-code-generator": "^0.14.1",
-    "graphql-codegen-typescript-common": "^0.14.1",
-    "graphql-codegen-typescript-server": "^0.14.1",
     "nodemon": "^1.18.5",
     "typescript": "^3.1.6"
   },
