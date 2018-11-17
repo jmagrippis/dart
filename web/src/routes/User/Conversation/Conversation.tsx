@@ -23,15 +23,15 @@ interface Data {
 }
 
 interface Variables {
-  username: string
+  subjectId: string
   interviewerId?: string
 }
 
 class ConversationQuery extends Query<Data, Variables> {}
 
 export const CONVERSATION = gql`
-  query Conversation($username: String!, $interviewerId: ID) {
-    conversation(username: $username, interviewerId: $interviewerId) {
+  query Conversation($subjectId: ID!, $interviewerId: ID) {
+    conversation(subjectId: $subjectId, interviewerId: $interviewerId) {
       id
       messages {
         id
@@ -54,7 +54,7 @@ const getOrGenerateUserId = () => {
 }
 
 interface Props {
-  username: string
+  subjectId: string
 }
 
 interface State {
@@ -67,19 +67,19 @@ export class Conversation extends PureComponent<Props, State> {
   }
 
   render() {
-    const { username } = this.props
+    const { subjectId } = this.props
     const { interviewerId } = this.state
     return (
       <ConversationQuery
         query={CONVERSATION}
-        variables={{ username, interviewerId }}
+        variables={{ subjectId, interviewerId }}
       >
         {({ loading, error, data }) => {
           if (loading) return <Loading />
           if (error || !data) return `Error!: ${error}`
 
           const {
-            conversation: { messages }
+            conversation: { id, messages }
           } = data
           return (
             <div>
@@ -97,7 +97,11 @@ export class Conversation extends PureComponent<Props, State> {
                   </li>
                 ))}
               </ul>
-              <Input subjectUsername={username} interviewerId={interviewerId} />
+              <Input
+                conversationId={id}
+                subjectId={subjectId}
+                interviewerId={interviewerId}
+              />
             </div>
           )
         }}

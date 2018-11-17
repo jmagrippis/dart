@@ -36,10 +36,14 @@ export const typeDefs = gql`
 
   type Query {
     findUserByUsername(username: String!): AuthenticatedUser
-    conversation(username: String!, interviewerId: ID): Conversation!
+    conversation(subjectId: ID!, interviewerId: ID): Conversation!
   }
 
   type Mutation {
-    addMessage(content: String!, interviewerId: ID): Message!
+    addMessage(
+      content: String!
+      conversationId: ID!
+      interviewerId: ID
+    ): Message!
   }
 `

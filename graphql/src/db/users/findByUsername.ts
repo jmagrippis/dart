@@ -1,4 +1,5 @@
 import { query } from '../pool'
+import { DbUser } from '../types'
 
 const sql = 'SELECT * FROM users WHERE username = $1 LIMIT 1'
 

@@ -10,14 +10,23 @@ interface Data {
 
 interface Variables {
   content: string
+  conversationId: string
   interviewerId?: string
 }
 
 class AddMessageMutation extends Mutation<Data, Variables> {}
 
 const ADD_MESSAGE = gql`
-  mutation AddMessage($content: String!, $interviewerId: ID) {
-    addMessage(content: $content, interviewerId: $interviewerId) {
+  mutation AddMessage(
+    $content: String!
+    $conversationId: ID!
+    $interviewerId: ID
+  ) {
+    addMessage(
+      content: $content
+      conversationId: $conversationId
+      interviewerId: $interviewerId
+    ) {
       id
       content
       sender {
@@ -28,7 +37,8 @@ const ADD_MESSAGE = gql`
 `
 
 interface Props {
-  subjectUsername: string
+  subjectId: string
+  conversationId: string
   interviewerId: string
 }
 
@@ -37,8 +47,8 @@ export class Input extends PureComponent<Props> {
 
   update: MutationUpdaterFn<Data> = (cache, { data }) => {
     if (!data) return
-    const { interviewerId, subjectUsername } = this.props
-    const variables = { interviewerId, username: subjectUsername }
+    const { interviewerId, subjectId } = this.props
+    const variables = { interviewerId, subjectId }
     const cachedData: { conversation: Conversation } | null = cache.readQuery({
       query: CONVERSATION,
       variables
@@ -69,10 +79,12 @@ export class Input extends PureComponent<Props> {
     const input = this.input.current
     if (!input) return
 
+    const { interviewerId, conversationId } = this.props
     addMessage({
       variables: {
-        content: input.value,
-        interviewerId: this.props.interviewerId
+        interviewerId,
+        conversationId,
+        content: input.value
       }
     })
     input.value = ''

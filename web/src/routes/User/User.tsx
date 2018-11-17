@@ -10,6 +10,7 @@ import { Conversation } from './Conversation/Conversation'
 const FIND_USER_BY_USER_NAME = gql`
   query FindUserByUsername($username: String!) {
     findUserByUsername(username: $username) {
+      id
       username
       displayName
     }
@@ -42,11 +43,11 @@ export const User = ({
         )
       }
 
-      const { displayName } = findUserByUsername
+      const { displayName, id } = findUserByUsername
 
       return (
         <DocumentTitle title={`DART - ${displayName}`}>
-          <Conversation username={username} />
+          <Conversation subjectId={id} />
         </DocumentTitle>
       )
     }}

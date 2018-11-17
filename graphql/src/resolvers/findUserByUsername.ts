@@ -1,4 +1,4 @@
-import { findByUsername } from '../db/user/findByUsername'
+import { findByUsername } from '../db/users/findByUsername'
 
 export const findUserByUsername = async (_, { username }) => {
   const dbUser = await findByUsername(username)
