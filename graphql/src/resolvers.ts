@@ -6,18 +6,28 @@ const findUserByUsername = (_, { username }) => ({
 })
 
 const conversation = (_, { username, interviewerId }) => ({
+  id: `conversation-for-${interviewerId}`,
   messages: [
     {
       id: 'abc',
       type: 'text',
       content:
-        'Hi! I am the Digital Automated Response system for Johnny. How may I help you?',
+        'Hi! I am the Digital Automated Response Tool for Johnny. How may I help you?',
       sender: {
         username,
-        email: `${username}@example.com`
+        id: username
       }
     }
   ]
+})
+
+const addMessage = (_, { content, interviewerId }) => ({
+  content,
+  id: `message-by-${interviewerId}`,
+  type: 'text',
+  sender: {
+    id: interviewerId
+  }
 })
 
 export const resolvers = {
@@ -25,9 +35,12 @@ export const resolvers = {
     findUserByUsername,
     conversation
   },
-  Sender: {
-    __resolveType(sender) {
-      return sender.email ? 'User' : 'AnonymousUser'
+  Mutation: {
+    addMessage
+  },
+  User: {
+    __resolveType({ username }) {
+      return username ? 'AuthenticatedUser' : 'AnonymousUser'
     }
   }
 }

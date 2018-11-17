@@ -1,14 +1,18 @@
 import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
-  type User {
+  interface User {
+    id: ID!
+  }
+
+  type AuthenticatedUser implements User {
     id: ID!
     email: String!
     username: String!
     displayName: String!
   }
 
-  type AnonymousUser {
+  type AnonymousUser implements User {
     id: ID!
   }
 
@@ -16,23 +20,26 @@ export const typeDefs = gql`
     text
   }
 
-  union Sender = User | AnonymousUser
-
   type Message {
     id: ID!
     type: MessageType!
     content: String!
-    sender: Sender!
+    sender: User!
   }
 
   type Conversation {
+    id: ID!
     interviewer: User!
-    subject: User!
+    subject: AuthenticatedUser!
     messages: [Message!]!
   }
 
   type Query {
-    findUserByUsername(username: String!): User
-    conversation(username: String!, interviewerId: String): Conversation!
+    findUserByUsername(username: String!): AuthenticatedUser
+    conversation(username: String!, interviewerId: ID): Conversation!
+  }
+
+  type Mutation {
+    addMessage(content: String!, interviewerId: ID): Message!
   }
 `

@@ -17,15 +17,22 @@ describe('User', () => {
   it('has a welcome message', () => {
     cy.get('[data-test="response"]:first').should(
       'contain',
-      'Hi! I am the Digital Automated Response system for Johnny. How may I help you?'
+      'Hi! I am the Digital Automated Response Tool for Johnny. How may I help you?'
     )
   })
 
-  xit('responds to a hello', () => {
-    cy.get('[data-test="input-question"]').type('Hello!')
+  it('responds to a question', () => {
+    cy.get('[data-test="question-input"]').type('Whereabouts do you live?')
+    cy.get('[data-test="question-submit"]').click()
 
-    cy.get('[data-test="question"]:first').should('contain', 'Hello!')
+    cy.get('[data-test="request"]:first').should(
+      'contain',
+      'Whereabouts do you live?'
+    )
 
-    cy.get('[data-test="response"]:nth-child(2)').should('contain', 'Hi!')
+    cy.get('[data-test="response"]:nth-child(2)').should(
+      'contain',
+      'I live in beautiful London!'
+    )
   })
 })
