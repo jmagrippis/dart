@@ -78,12 +78,14 @@ export interface FindUserByUsernameQueryArgs {
   username: string
 }
 export interface ConversationQueryArgs {
-  username: string
+  subjectId: string
 
   interviewerId?: string | null
 }
 export interface AddMessageMutationArgs {
   content: string
+
+  conversationId: string
 
   interviewerId?: string | null
 }

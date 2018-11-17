@@ -4,11 +4,11 @@
   "description": "The graphql server for the digital self assistant",
   "main": "build/index.js",
   "scripts": {
-    "start": "node -r dotenv/config ./build/index.js dotenv_config_path=./.env",
+    "start": "node -r dotenv/config ./build/index.js",
     "dev": "PORT=3001 ./startDev.sh",
     "build": "NODE_ENV=production tsc",
     "codegen": "gql-gen",
-    "deploy": "yarn build && cp ./env.local ./.env && gcloud app deploy --project=digital-auto-response-tool && rm ./.env"
+    "deploy": "yarn build && gcloud app deploy --project=digital-auto-response-tool"
   },
   "dependencies": {
     "apollo-server": "^2.2.0",

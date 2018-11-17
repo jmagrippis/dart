@@ -17,56 +17,49 @@ exports.up = pgm => {
     type: 'json'
   }
 
+  const created_at = {
+    type: 'timestamp',
+    notNull: true,
+    default: pgm.func('current_timestamp')
+  }
+
   pgm.createTable(USERS, {
     id,
     data,
-    username: { type: 'varchar(255)', notNull: true },
-    createdAt: {
-      type: 'timestamp',
-      unique: true,
-      notNull: true,
-      default: pgm.func('current_timestamp')
-    }
+    created_at,
+    username: { type: 'varchar(255)', notNull: true, unique: true }
   })
   pgm.createIndex(USERS, 'username')
 
   pgm.createTable(CONVERSATIONS, {
     id,
     data,
-    subjectId: {
+    created_at,
+    subject_id: {
       type: 'uuid',
       notNull: true,
       references: USERS,
       onDelete: 'cascade'
     },
-    interviewerId: {
+    interviewer_id: {
       type: 'uuid',
       notNull: true
-    },
-    createdAt: {
-      type: 'timestamp',
-      notNull: true,
-      default: pgm.func('current_timestamp')
     }
   })
-  pgm.createIndex(CONVERSATIONS, ['subjectId', 'interviewerId'])
+  pgm.createIndex(CONVERSATIONS, ['subject_id', 'interviewer_id'])
 
   pgm.createTable(MESSAGES, {
     id,
     data,
-    conversationId: {
+    created_at,
+    conversation_id: {
       type: 'uuid',
       notNull: true,
       references: CONVERSATIONS,
       onDelete: 'cascade'
-    },
-    createdAt: {
-      type: 'timestamp',
-      notNull: true,
-      default: pgm.func('current_timestamp')
     }
   })
-  pgm.createIndex(MESSAGES, 'conversationId')
+  pgm.createIndex(MESSAGES, 'conversation_id')
 }
 
 exports.down = pgm => {

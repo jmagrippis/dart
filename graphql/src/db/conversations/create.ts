@@ -2,7 +2,7 @@ import { query } from '../pool'
 import { DbConversation } from '../types'
 
 const sql =
-  'INSERT INTO conversations("subjectId", "interviewerId") VALUES($1, $2) RETURNING *'
+  'INSERT INTO conversations(subject_id, interviewer_id) VALUES($1, $2) RETURNING *'
 
 export const create = async ({
   subjectId,
