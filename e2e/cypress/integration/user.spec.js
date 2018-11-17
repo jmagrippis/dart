@@ -2,7 +2,7 @@ const { describe, cy, before } = global
 
 describe('User', () => {
   const user = {
-    username: 'johnny',
+    username: 'jmagrippis',
     displayName: 'Johnny'
   }
 

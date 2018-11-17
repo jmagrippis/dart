@@ -32,9 +32,17 @@ export const User = ({
       if (loading) return <Loading />
       if (error) return <div>Error :(</div>
 
-      const {
-        findUserByUsername: { displayName }
-      } = data
+      const { findUserByUsername } = data
+
+      if (!findUserByUsername) {
+        return (
+          <div>
+            Could not find user <strong>{username}</strong>!
+          </div>
+        )
+      }
+
+      const { displayName } = findUserByUsername
 
       return (
         <DocumentTitle title={`DART - ${displayName}`}>

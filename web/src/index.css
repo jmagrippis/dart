@@ -13,3 +13,7 @@ body,
 button {
   cursor: pointer;
 }
+
+strong {
+  font-weight: 600;
+}

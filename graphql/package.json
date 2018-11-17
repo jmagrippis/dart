@@ -4,20 +4,27 @@
   "description": "The graphql server for the digital self assistant",
   "main": "build/index.js",
   "scripts": {
-    "start": "node ./build/index.js",
+    "start": "node -r dotenv/config ./build/index.js dotenv_config_path=./.env",
     "dev": "PORT=3001 ./startDev.sh",
     "build": "NODE_ENV=production tsc",
-    "deploy": "yarn build && gcloud app deploy --project=digital-auto-response-tool"
+    "codegen": "gql-gen",
+    "deploy": "yarn build && cp ./env.local ./.env && gcloud app deploy --project=digital-auto-response-tool && rm ./.env"
   },
   "dependencies": {
     "apollo-server": "^2.2.0",
     "dotenv": "^6.1.0",
-    "graphql": "^14.0.2"
+    "graphql": "^14.0.2",
+    "node-pg-migrate": "^3.14.0",
+    "pg": "^7.6.1"
   },
   "devDependencies": {
     "@types/dotenv": "^4.0.3",
     "@types/graphql": "^14.0.3",
+    "@types/pg": "^7.4.11",
     "@types/zen-observable": "^0.8.0",
+    "graphql-code-generator": "^0.14.1",
+    "graphql-codegen-typescript-common": "^0.14.1",
+    "graphql-codegen-typescript-server": "^0.14.1",
     "nodemon": "^1.18.5",
     "typescript": "^3.1.6"
   },

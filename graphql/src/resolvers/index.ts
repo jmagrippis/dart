@@ -1,9 +1,4 @@
-const findUserByUsername = (_, { username }) => ({
-  username,
-  id: username,
-  email: `${username}@example.com`,
-  displayName: `${username.charAt(0).toUpperCase()}${username.slice(1)}`
-})
+import { findUserByUsername } from './findUserByUsername'
 
 const conversation = (_, { username, interviewerId }) => ({
   id: `conversation-for-${interviewerId}`,
