@@ -4,5 +4,6 @@ const host =
     : undefined
 
 export const config = {
-  host
+  host,
+  database: process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
 }
