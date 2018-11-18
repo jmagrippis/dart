@@ -1,4 +1,5 @@
 const user = require('../../../seeds/user')
+const c = require('../../../seeds/class')
 
 const { describe, cy, before } = global
 
@@ -20,7 +21,7 @@ describe('User', () => {
   })
 
   it('responds to a question', () => {
-    cy.get('[data-test="question-input"]').type('Whereabouts do you live?')
+    cy.get('[data-test="question-input"]').type('What is the meaning of life?')
     cy.get('[data-test="question-submit"]').click()
 
     cy.get('[data-test="request"]:first').should(
@@ -30,7 +31,7 @@ describe('User', () => {
 
     cy.get('[data-test="response"]:nth-child(2)').should(
       'contain',
-      'I live in beautiful London!'
+      c.data.response
     )
   })
 })
