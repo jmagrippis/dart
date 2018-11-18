@@ -6,7 +6,8 @@
   "scripts": {
     "codegen": "gql-gen",
     "dbMigrate": "./db/migrate.sh",
-    "dbRollback": "./db/migrateRollback.sh"
+    "dbRollback": "./db/migrateRollback.sh",
+    "dbSeed": "./db/seed.sh"
   },
   "devDependencies": {
     "babel-eslint": "9.0",
@@ -16,6 +17,7 @@
     "eslint-plugin-import": "^2.0",
     "eslint-plugin-jsx-a11y": "^6.0",
     "eslint-plugin-react": "^7.0",
+    "faker": "^4.1.0",
     "graphql": "^14.0.2",
     "graphql-code-generator": "^0.14.1",
     "graphql-codegen-typescript-client": "^0.14.1",

@@ -2,6 +2,7 @@ import { findByPair } from '../db/conversations/findByPair'
 import { create as createConversation } from '../db/conversations/create'
 import { create as createMessage } from '../db/messages/create'
 import { findForConversationId } from '../db/messages/findForConversationId'
+import { getGreeting } from '../db/users/getGreeting'
 
 export const conversation = async (_, { subjectId, interviewerId }) => {
   const dbConversation = await findByPair({ subjectId, interviewerId })
@@ -12,11 +13,12 @@ export const conversation = async (_, { subjectId, interviewerId }) => {
       interviewerId
     })
 
+    const greeting = await getGreeting(subjectId)
+
     const messageData = {
       senderId: subjectId,
       type: 'text',
-      content:
-        'Hi! I am the Digital Automated Response Tool for Johnny. How may I help you?'
+      content: greeting
     }
     const dbMessage = await createMessage({ conversationId, data: messageData })
 

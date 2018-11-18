@@ -1,24 +1,22 @@
+const user = require('../../../seeds/user')
+
 const { describe, cy, before } = global
 
 describe('User', () => {
-  const user = {
-    username: 'jmagrippis',
-    displayName: 'Johnny'
-  }
-
   before(() => {
+    cy.exec('cd .. && yarn dbSeed && cd e2e')
+      .its('code')
+      .should('eq', 0)
+
     cy.visit(`/u/${user.username}`)
   })
 
   it('loads', () => {
-    cy.title().should('equal', `DART - ${user.displayName}`)
+    cy.title().should('equal', `DART - ${user.data.displayName}`)
   })
 
   it('has a welcome message', () => {
-    cy.get('[data-test="response"]:first').should(
-      'contain',
-      'Hi! I am the Digital Automated Response Tool for Johnny. How may I help you?'
-    )
+    cy.get('[data-test="response"]:first').should('contain', user.data.greeting)
   })
 
   it('responds to a question', () => {
