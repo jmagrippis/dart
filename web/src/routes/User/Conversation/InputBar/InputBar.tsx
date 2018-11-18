@@ -49,6 +49,8 @@ const Input = styled.input`
   border: none;
   box-shadow: ${shadow.depth1};
   transition: box-shadow 0.3s ${easings.outQuart};
+  border-radius: 10px;
+  padding: 0 10px;
 
   &:focus {
     outline: 0 solid transparent;
