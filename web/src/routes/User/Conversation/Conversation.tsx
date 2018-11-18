@@ -3,10 +3,12 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import store from 'store2'
 import uuid from 'uuid/v4'
+import styled from 'styled-components'
 
 import { Input } from './Input/Input'
 import { Loading } from '../../../Loading/Loading'
 import { Conversation as ConversationTypes } from '../../../types'
+import { Messages } from './Messages/Messages'
 
 class ConversationQuery extends Query<
   ConversationTypes.Query,
@@ -45,6 +47,14 @@ interface State {
   interviewerId: string
 }
 
+const Container = styled.div`
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+
 export class Conversation extends PureComponent<Props, State> {
   state = {
     interviewerId: getOrGenerateUserId()
@@ -67,27 +77,14 @@ export class Conversation extends PureComponent<Props, State> {
             conversation: { id, messages }
           } = data
           return (
-            <div>
-              <ul>
-                {messages.map((message: ConversationTypes.Messages) => (
-                  <li
-                    key={message.id}
-                    data-test={
-                      message.sender.id === interviewerId
-                        ? 'request'
-                        : 'response'
-                    }
-                  >
-                    {message.content}
-                  </li>
-                ))}
-              </ul>
+            <Container>
+              <Messages messages={messages} interviewerId={interviewerId} />
               <Input
                 conversationId={id}
                 subjectId={subjectId}
                 interviewerId={interviewerId}
               />
-            </div>
+            </Container>
           )
         }}
       </ConversationQuery>
