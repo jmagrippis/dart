@@ -4,7 +4,10 @@ import { Mutation, MutationFn } from 'react-apollo'
 import { MutationUpdaterFn } from 'apollo-boost'
 
 import { CONVERSATION } from '../Conversation'
+import { ReactComponent as Send } from './send.svg'
 import { AddMessage, Conversation } from '../../../../types'
+import styled from 'styled-components'
+import { colors, shadow, easings } from '../../../../theme'
 
 class AddMessageMutation extends Mutation<
   AddMessage.Mutation,
@@ -29,6 +32,38 @@ const ADD_MESSAGE = gql`
       }
     }
   }
+`
+
+const Container = styled.form`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+`
+
+const NativeInput = styled.input`
+  flex: 1;
+  margin-right: 20px;
+  align-self: stretch;
+  font-size: 16px;
+  border: none;
+  box-shadow: ${shadow.depth1};
+  transition: box-shadow 0.3s ${easings.outQuart};
+
+  &:focus {
+    outline: 0 solid transparent;
+    box-shadow: ${shadow.depth2};
+  }
+`
+
+const StyledSend = styled(Send)`
+  width: 24px;
+  display: block;
+  fill: ${colors.accent};
+  background-color: #ffffff;
+  padding: 6px;
+  border-radius: 50%;
+  box-shadow: ${shadow.depth1};
 `
 
 interface Props {
@@ -76,12 +111,15 @@ export class Input extends PureComponent<Props> {
     const input = this.input.current
     if (!input) return
 
+    const content = input.value.trim()
+    if (!content) return
+
     const { interviewerId, conversationId } = this.props
     addMessage({
       variables: {
         interviewerId,
         conversationId,
-        content: input.value
+        content
       }
     })
     input.value = ''
@@ -90,15 +128,13 @@ export class Input extends PureComponent<Props> {
   render() {
     return (
       <AddMessageMutation mutation={ADD_MESSAGE} update={this.update}>
-        {addMessage => (
-          <div>
-            <form onSubmit={this.onSubmit(addMessage)}>
-              <input ref={this.input} data-test="question-input" />
-              <button data-test="question-submit" type="submit">
-                Submit
-              </button>
-            </form>
-          </div>
+        {(addMessage) => (
+          <Container onSubmit={this.onSubmit(addMessage)}>
+            <NativeInput innerRef={this.input} data-test="question-input" />
+            <button data-test="question-submit" type="submit">
+              <StyledSend />
+            </button>
+          </Container>
         )}
       </AddMessageMutation>
     )

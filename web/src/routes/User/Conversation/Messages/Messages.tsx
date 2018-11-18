@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { colors, shadow } from '../../../../theme'
 import { Conversation } from '../../../../types'
 
 const Container = styled.ul`
@@ -8,14 +9,17 @@ const Container = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  overflow-y: scroll;
 `
 
 const Message = styled.li<{ isOutgoing: boolean }>`
-  background-color: ${({ isOutgoing }) => (isOutgoing ? '#d7e8ce' : '#ffffff')};
+  background-color: ${({ isOutgoing }) =>
+    isOutgoing ? colors.accent : '#ffffff'};
   ${({ isOutgoing }) => (isOutgoing ? 'align-self: flex-end' : '')};
   border-radius: 10px;
   padding: 5px 10px;
-  box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.1);
+  margin: 4px 2px;
+  box-shadow: ${shadow.depth1};
 
   &:first-child {
     margin-top: 10px;
