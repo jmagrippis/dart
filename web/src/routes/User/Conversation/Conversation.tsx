@@ -5,7 +5,7 @@ import store from 'store2'
 import uuid from 'uuid/v4'
 import styled from 'styled-components'
 
-import { Input } from './Input/Input'
+import { InputBar } from './InputBar/InputBar'
 import { Loading } from '../../../Loading/Loading'
 import { Conversation as ConversationTypes } from '../../../types'
 import { Messages } from './Messages/Messages'
@@ -80,7 +80,7 @@ export class Conversation extends PureComponent<Props, State> {
           return (
             <Container>
               <Messages messages={messages} interviewerId={interviewerId} />
-              <Input
+              <InputBar
                 conversationId={id}
                 subjectId={subjectId}
                 interviewerId={interviewerId}

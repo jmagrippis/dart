@@ -41,7 +41,7 @@ const Container = styled.form`
   padding: 10px 0;
 `
 
-const NativeInput = styled.input`
+const Input = styled.input`
   flex: 1;
   margin-right: 20px;
   align-self: stretch;
@@ -72,7 +72,7 @@ interface Props {
   interviewerId: string
 }
 
-export class Input extends PureComponent<Props> {
+export class InputBar extends PureComponent<Props> {
   input = createRef<HTMLInputElement>()
 
   update: MutationUpdaterFn<AddMessage.Mutation> = (cache, { data }) => {
@@ -130,7 +130,7 @@ export class Input extends PureComponent<Props> {
       <AddMessageMutation mutation={ADD_MESSAGE} update={this.update}>
         {(addMessage) => (
           <Container onSubmit={this.onSubmit(addMessage)}>
-            <NativeInput innerRef={this.input} data-test="question-input" />
+            <Input innerRef={this.input} data-test="question-input" />
             <button data-test="question-submit" type="submit">
               <StyledSend />
             </button>
