@@ -24,14 +24,15 @@ describe('User', () => {
     cy.get('[data-test="question-input"]').type('What is the meaning of life?')
     cy.get('[data-test="question-submit"]').click()
 
-    cy.get('[data-test="request"]:first').should(
+    cy.get('[data-test="request"]').should(
       'contain',
-      'Whereabouts do you live?'
+      'What is the meaning of life?'
     )
 
-    cy.get('[data-test="response"]:nth-child(2)').should(
-      'contain',
-      c.data.response
-    )
+    cy.get('[data-test="response"]').should('have.length', 2)
+
+    cy.get('[data-test="response"]')
+      .last()
+      .should('contain', c.data.response)
   })
 })

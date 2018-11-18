@@ -10,15 +10,28 @@ export interface DbUser {
 
 export interface DbConversation {
   id: string
-  subjectId: string
-  interviewerId: string
+  subject_id: string
+  interviewer_id: string
+}
+
+export interface MessageData {
+  type: string
+  content: string
+  senderId: string
 }
 
 export interface DbMessage {
   id: string
-  conversationId: string
+  conversation_id: string
+  data: MessageData
+}
+
+export interface DbClass {
+  id: string
+  name: string
+  user_id: string
   data: {
-    senderId: string
-    type: string
+    response: string
+    autocomplete: boolean
   }
 }

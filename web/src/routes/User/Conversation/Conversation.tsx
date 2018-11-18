@@ -57,6 +57,7 @@ export class Conversation extends PureComponent<Props, State> {
       <ConversationQuery
         query={CONVERSATION}
         variables={{ subjectId, interviewerId }}
+        pollInterval={1000}
       >
         {({ loading, error, data }) => {
           if (loading) return <Loading />

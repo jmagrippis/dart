@@ -1,4 +1,5 @@
 import { create } from '../db/messages/create'
+import { createResponseForMessage } from '../db/messages/createResponseForMessage'
 
 export const addMessage = async (
   _,
@@ -9,10 +10,12 @@ export const addMessage = async (
     senderId: interviewerId,
     type: 'text'
   }
-  const { id } = await create({ conversationId, data })
+  const message = await create({ conversationId, data })
+
+  createResponseForMessage(message)
 
   return {
-    id,
+    id: message.id,
     ...data,
     sender: {
       id: interviewerId
