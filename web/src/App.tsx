@@ -2,10 +2,14 @@ import React, { Fragment } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route } from 'react-router-dom'
 
-import { apolloClient } from './apolloClient'
 import { LazyHome, LazyProfile, LazyUser } from './routes'
+import { ApolloClient } from 'apollo-boost'
 
-export const App = () => (
+interface Props {
+  apolloClient: ApolloClient<{}>
+}
+
+export const App = ({ apolloClient }: Props) => (
   <ApolloProvider client={apolloClient}>
     <BrowserRouter>
       <Fragment>
