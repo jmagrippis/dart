@@ -1,7 +1,10 @@
 import React, { Fragment } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route } from 'react-router-dom'
+import 'reset-css'
 
+import './resetButton.css'
+import './App.css'
 import { LazyHome, LazyProfile, LazyUser } from './routes'
 import { ApolloClient } from 'apollo-boost'
 
