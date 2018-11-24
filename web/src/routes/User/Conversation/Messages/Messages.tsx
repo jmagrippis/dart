@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent, createRef } from 'react'
 import styled from 'styled-components'
 
 import { colors, shadow } from '../../../../theme'
@@ -35,16 +35,35 @@ interface Props {
   interviewerId: string
 }
 
-export const Messages = ({ messages, interviewerId }: Props) => (
-  <Container>
-    {messages.map((message) => (
-      <Message
-        key={message.id}
-        data-test={message.sender.id === interviewerId ? 'request' : 'response'}
-        isOutgoing={message.sender.id === interviewerId}
-      >
-        {message.content}
-      </Message>
-    ))}
-  </Container>
-)
+export class Messages extends PureComponent<Props> {
+  container = createRef<HTMLUListElement>()
+
+  componentDidUpdate(prevProps: Props) {
+    if (
+      prevProps.messages.length !== this.props.messages.length &&
+      this.container.current
+    ) {
+      this.container.current.scrollTop = this.container.current.scrollHeight
+    }
+  }
+
+  render() {
+    const { messages, interviewerId } = this.props
+
+    return (
+      <Container innerRef={this.container}>
+        {messages.map((message) => (
+          <Message
+            key={message.id}
+            data-test={
+              message.sender.id === interviewerId ? 'request' : 'response'
+            }
+            isOutgoing={message.sender.id === interviewerId}
+          >
+            {message.content}
+          </Message>
+        ))}
+      </Container>
+    )
+  }
+}

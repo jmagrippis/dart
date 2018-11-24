@@ -49,11 +49,12 @@ interface State {
 
 const Container = styled.div`
   max-width: 700px;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 0 5px;
 `
 
 export class Conversation extends PureComponent<Props, State> {
