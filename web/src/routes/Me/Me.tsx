@@ -6,6 +6,7 @@ import DocumentTitle from 'react-document-title'
 import { Loading } from '../../Loading/Loading'
 import { Me } from '../../types'
 import { Login } from '../../Login/Login'
+import { Logout } from '../../Logout/Logout'
 
 class MeQuery extends Query<Me.Query, Me.Variables> {}
 
@@ -54,6 +55,7 @@ export const MePage = () => (
               <div>displayName:</div>
               <div data-test="displayName">{displayName}</div>
             </div>
+            <Logout />
           </div>
         </DocumentTitle>
       )

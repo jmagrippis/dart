@@ -3,7 +3,7 @@ import { WebAuth } from 'auth0-js'
 
 import { AuthContext } from '../AuthContext'
 
-export class Login extends PureComponent {
+export class Logout extends PureComponent {
   static contextType = AuthContext
 
   // @ts-ignore
@@ -11,13 +11,13 @@ export class Login extends PureComponent {
 
   onClick = () => {
     const auth = this.context
-    auth.authorize()
+    auth.logout({})
   }
 
   render() {
     return (
-      <button data-test="login" onClick={this.onClick}>
-        login
+      <button data-test="logout" onClick={this.onClick}>
+        logout
       </button>
     )
   }
