@@ -2,6 +2,7 @@ import { ApolloServer } from 'apollo-server'
 
 import { typeDefs } from './typeDefs'
 import { resolvers } from './resolvers'
+import { context } from './context'
 ;(async () => {
   const engine = process.env.ENGINE_API_KEY
     ? {
@@ -13,6 +14,7 @@ import { resolvers } from './resolvers'
     typeDefs,
     resolvers,
     engine,
+    context,
     introspection: true
   }
 

@@ -37,6 +37,7 @@ export const typeDefs = gql`
   type Query {
     findUserByUsername(username: String!): AuthenticatedUser
     conversation(subjectId: ID!, interviewerId: ID): Conversation!
+    me: AuthenticatedUser
   }
 
   type Mutation {

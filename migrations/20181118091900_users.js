@@ -15,6 +15,11 @@ exports.up = function(knex) {
         .notNullable()
         .unique()
 
+      table
+        .string('email')
+        .notNullable()
+        .unique()
+
       table.timestamp('created_at').defaultTo(knex.fn.now())
 
       table.jsonb('data').notNullable()

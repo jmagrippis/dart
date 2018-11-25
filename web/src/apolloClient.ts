@@ -7,7 +7,7 @@ export const apolloClient = new ApolloClient({
     const token = store('token')
     operation.setContext({
       headers: {
-        authorization: token ? `Bearer ${token}` : ''
+        authorization: token
       }
     })
   }

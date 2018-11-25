@@ -14,6 +14,28 @@ export type Upload = any
 // Documents
 // ====================================================
 
+export namespace Me {
+  export type Variables = {}
+
+  export type Query = {
+    __typename?: 'Query'
+
+    me: Me | null
+  }
+
+  export type Me = {
+    __typename?: 'AuthenticatedUser'
+
+    id: string
+
+    email: string
+
+    username: string
+
+    displayName: string
+  }
+}
+
 export namespace Conversation {
   export type Variables = {
     subjectId: string

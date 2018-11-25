@@ -3,7 +3,9 @@ import { DbUser } from '../types'
 
 const sql = 'SELECT * FROM users WHERE username = $1 LIMIT 1'
 
-export const findByUsername = async (username): Promise<DbUser | void> => {
+export const findByUsername = async (
+  username: string
+): Promise<DbUser | void> => {
   const {
     rows: [user]
   } = await query(sql, [username])

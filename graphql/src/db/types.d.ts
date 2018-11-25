@@ -1,9 +1,9 @@
 export interface DbUser {
   id: string
   username: string
+  email: string
   data: {
     displayName: string
-    email: string
   }
   createdAt: string
 }

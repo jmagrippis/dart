@@ -30,6 +30,8 @@ export interface Query {
   findUserByUsername?: AuthenticatedUser | null
 
   conversation: Conversation
+
+  me?: AuthenticatedUser | null
 }
 
 export interface AuthenticatedUser extends User {
