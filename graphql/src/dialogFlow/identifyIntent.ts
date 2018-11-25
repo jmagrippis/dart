@@ -36,11 +36,10 @@ export const identifyIntent = async ({
     ([type, value]) => ({
       type,
       // @ts-ignore
-      name: value.stringValue
+      name: value[value.kind]
     })
   )
 
-  // @ts-ignore
   return {
     name: intentName,
     entities
