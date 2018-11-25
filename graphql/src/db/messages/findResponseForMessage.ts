@@ -25,7 +25,7 @@ export const findResponseForMessage = async ({
 
   if (!intent) return
 
-  if (!entities) {
+  if (!entities.length) {
     const response = {
       type: 'text',
       content: intent.data.response,
