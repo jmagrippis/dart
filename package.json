@@ -10,6 +10,7 @@
     "dbSeed": "./db/seed.sh"
   },
   "devDependencies": {
+    "@types/dialogflow": "^0.6.3",
     "babel-eslint": "9.0",
     "eslint": "5.6.0",
     "eslint-config-react-app": "^3.0.5",
@@ -38,5 +39,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jmagrippis/dart"
+  },
+  "dependencies": {
+    "dialogflow": "^0.7.0"
   }
 }

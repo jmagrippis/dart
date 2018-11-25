@@ -13,8 +13,8 @@ export const resolvers = {
     addMessage
   },
   User: {
-    __resolveType({ username }) {
-      return username ? 'AuthenticatedUser' : 'AnonymousUser'
+    __resolveType({ email }) {
+      return email ? 'AuthenticatedUser' : 'AnonymousUser'
     }
   }
 }

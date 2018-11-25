@@ -6,7 +6,6 @@ const factory = (user) => ({ data, ...partial }) => ({
   created_at: faker.date.recent(),
   data: {
     response: faker.lorem.sentences(),
-    autocomplete: faker.random.boolean(),
     ...data
   },
   ...partial

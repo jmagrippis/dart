@@ -26,12 +26,19 @@ export interface DbMessage {
   data: MessageData
 }
 
-export interface DbClass {
-  id: string
+export interface Entity {
   name: string
+  response: string
+}
+
+export interface DbIntent {
+  id: string
   user_id: string
+  name: string
   data: {
-    response: string
-    autocomplete: boolean
+    response?: string
+    entities?: {
+      [key: string]: Entity
+    }
   }
 }

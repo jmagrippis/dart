@@ -1,5 +1,5 @@
 const user = require('../../../seeds/user')
-const c = require('../../../seeds/class')
+const intent = require('../../../seeds/intent')
 
 const { describe, cy, before } = global
 
@@ -33,6 +33,6 @@ describe('User', () => {
 
     cy.get('[data-test="response"]')
       .last()
-      .should('contain', c.data.response)
+      .should('contain', intent.data.response)
   })
 })

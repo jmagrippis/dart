@@ -1,7 +1,7 @@
-const CLASSES = 'classes'
+const INTENTS = 'intents'
 
 exports.up = function(knex) {
-  return knex.schema.createTable(CLASSES, function(table) {
+  return knex.schema.createTable(INTENTS, function(table) {
     table
       .uuid('id')
       .notNullable()
@@ -20,9 +20,11 @@ exports.up = function(knex) {
     table.timestamp('created_at').defaultTo(knex.fn.now())
 
     table.jsonb('data').notNullable()
+
+    table.index(['user_id', 'name'])
   })
 }
 
 exports.down = function(knex) {
-  return knex.schema.dropTable(CLASSES)
+  return knex.schema.dropTable(INTENTS)
 }

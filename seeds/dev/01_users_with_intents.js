@@ -1,12 +1,12 @@
 const faker = require('faker')
 
 const userFactory = require('../factories/user')
-const classFactory = require('../factories/class')
+const intentFactory = require('../factories/intent')
 const user = require('../user')
-const c = require('../class')
+const intent = require('../intent')
 
 const USERS = 'users'
-const CLASSES = 'classes'
+const INTENTS = 'intents'
 
 exports.seed = async function(knex) {
   await knex(USERS).del()
@@ -15,10 +15,10 @@ exports.seed = async function(knex) {
 
   await knex(USERS).insert(users)
 
-  const classes = users.reduce(
-    (acc, u) => [...acc, ...[...Array(5).keys()].map(classFactory(u))],
-    [c]
+  const intents = users.reduce(
+    (acc, u) => [...acc, ...[...Array(5).keys()].map(intentFactory(u))],
+    [intent]
   )
 
-  return knex(CLASSES).insert(classes)
+  return knex(INTENTS).insert(intents)
 }

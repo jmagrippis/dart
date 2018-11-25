@@ -1,26 +1,51 @@
-import { MessageData } from '../types'
+import { MessageData, DbMessage } from '../types'
 import { find } from '../conversations/find'
-import { findAllForUserId } from '../classes/findAllForUserId'
+import { findForUserIdAndName } from '../intents/findForUserIdAndName'
+import { identifyIntent } from '../../dialogFlow/identifyIntent'
 
 export const findResponseForMessage = async ({
   conversation_id,
   data: { content }
-}): Promise<MessageData> => {
+}: DbMessage): Promise<MessageData> => {
   const conversation = await find(conversation_id)
 
   if (!conversation) {
     throw Error(`Could not find conversation ${conversation_id}`)
   }
 
-  const classes = await findAllForUserId(conversation.subject_id)
+  const { name, entities } = await identifyIntent({
+    content,
+    conversationId: conversation_id
+  })
 
-  const matchedClass = classes.find((c) => content.indexOf(c.name) > -1)
+  const intent = await findForUserIdAndName({
+    name,
+    userId: conversation.subject_id
+  })
 
-  if (!matchedClass) return
+  if (!intent) return
 
-  return {
-    type: 'text',
-    content: matchedClass.data.response,
-    senderId: conversation.subject_id
+  if (!entities) {
+    const response = {
+      type: 'text',
+      content: intent.data.response,
+      senderId: conversation.subject_id
+    }
+
+    return response
+  }
+
+  if (
+    entities &&
+    intent.data.entities &&
+    intent.data.entities[entities[0].name]
+  ) {
+    const response = {
+      type: 'text',
+      content: intent.data.entities[entities[0].name].response,
+      senderId: conversation.subject_id
+    }
+
+    return response
   }
 }
