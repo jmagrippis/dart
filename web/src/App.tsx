@@ -1,14 +1,14 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { WebAuth } from 'auth0-js'
+import { ApolloClient } from 'apollo-boost'
 import 'reset-css'
 
 import './resetButton.css'
 import './App.css'
-import { LazyHome, LazyMe, LazyUser, LazyAuth } from './routes'
-import { ApolloClient } from 'apollo-boost'
 import { AuthProvider } from './AuthContext'
+import AllRoutes from './AllRoutes/AllRoutes'
 
 interface Props {
   apolloClient: ApolloClient<{}>
@@ -19,12 +19,7 @@ export const App = ({ apolloClient, auth }: Props) => (
   <ApolloProvider client={apolloClient}>
     <AuthProvider value={auth}>
       <BrowserRouter>
-        <Fragment>
-          <Route path="/" exact component={LazyHome} />
-          <Route path="/me" exact component={LazyMe} />
-          <Route path="/u/:username" component={LazyUser} />
-          <Route path="/auth" component={LazyAuth} />
-        </Fragment>
+        <Route path="/" component={AllRoutes} />
       </BrowserRouter>
     </AuthProvider>
   </ApolloProvider>

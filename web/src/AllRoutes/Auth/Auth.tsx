@@ -16,10 +16,10 @@ interface State {
 export class Auth extends PureComponent<Props, State> {
   static contextType = AuthContext
 
-  state: State = {}
-
   // @ts-ignore
   context: WebAuth
+
+  state: State = {}
 
   componentDidMount() {
     const auth = this.context
@@ -37,7 +37,7 @@ export class Auth extends PureComponent<Props, State> {
 
       store('token', authResult.idToken)
       const { history } = this.props
-      history.replace('/me')
+      history.push('/me')
     })
   }
 
