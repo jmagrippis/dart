@@ -1,37 +1,43 @@
-import jwt from 'jsonwebtoken'
-import jwksClient from 'jwks-rsa'
+import fetch from 'node-fetch'
 
 const AUTH_DOMAIN = 'dart.eu.auth0.com'
-const AUTH_CLIENT_ID = 'TNDRNXb-YiZjcmg3yO7pyU57eL_BYr4t'
 
-const client = jwksClient({
-  jwksUri: `https://${AUTH_DOMAIN}/.well-known/jwks.json`
-})
+const authUrl = `https://${AUTH_DOMAIN}/userinfo`
 
-function getKey(header, cb) {
-  client.getSigningKey(header.kid, function(err, key) {
-    var signingKey = key.publicKey || key.rsaPublicKey
-    cb(null, signingKey)
+export interface Auth0User {
+  sub: string
+  given_name: string
+  family_name: string
+  nickname: string
+  name: string
+  picture: string
+  gender: string
+  locale: string
+  updated_at: string
+  email: string
+  email_verified: boolean
+}
+
+export interface Context {
+  auth: Promise<Auth0User>
+}
+
+const getAuth = async (req): Promise<Auth0User> => {
+  const authorization = req.headers.authorization
+
+  const response = await fetch(authUrl, {
+    headers: { authorization }
   })
-}
 
-const options = {
-  audience: AUTH_CLIENT_ID,
-  issuer: `https://${AUTH_DOMAIN}/`,
-  algorithms: ['RS256']
-}
-
-export const context = ({ req }) => {
-  const token = req.headers.authorization
-
-  return {
-    auth: new Promise((resolve) => {
-      jwt.verify(token, getKey, options, (err, decoded: { email: string }) => {
-        if (err) {
-          return resolve({})
-        }
-        resolve({ email: decoded.email })
-      })
-    })
+  if (!response || !response.ok) {
+    return
   }
+
+  const auth = await response.json()
+
+  return auth
+}
+
+export const context = async ({ req }): Promise<Context> => {
+  return { auth: getAuth(req) }
 }

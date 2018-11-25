@@ -8,6 +8,6 @@ export const auth = new WebAuth({
   clientID: AUTH_CLIENT_ID,
   redirectUri: `${process.env.REACT_APP_WEB}auth`,
   audience: `https://${AUTH_DOMAIN}/userinfo`,
-  responseType: 'token id_token',
-  scope: 'openid email'
+  responseType: 'token',
+  scope: 'openid profile email'
 })

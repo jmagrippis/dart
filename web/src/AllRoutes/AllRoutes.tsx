@@ -5,8 +5,7 @@ import { WebAuth } from 'auth0-js'
 
 import { LazyHome, LazyMe, LazyUser, LazyAuth } from './routes'
 import { AuthContext } from '../AuthContext'
-
-const LOCAL_STORAGE_TOKEN_KEY = 'token'
+import { LOCAL_STORAGE_TOKEN_KEY } from '../constants'
 
 export class AllRoutes extends PureComponent<RouteComponentProps> {
   static contextType = AuthContext
@@ -29,12 +28,12 @@ export class AllRoutes extends PureComponent<RouteComponentProps> {
     const auth = this.context
 
     auth.checkSession({}, (err, authResult) => {
-      if (err || !authResult || !authResult.idToken) {
+      if (err || !authResult || !authResult.accessToken) {
         store.remove(LOCAL_STORAGE_TOKEN_KEY)
         return
       }
 
-      store(LOCAL_STORAGE_TOKEN_KEY, authResult.idToken)
+      store(LOCAL_STORAGE_TOKEN_KEY, authResult.accessToken)
     })
   }
 

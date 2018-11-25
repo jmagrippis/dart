@@ -30,7 +30,7 @@ export namespace Me {
 
     email: string
 
-    username: string
+    username: string | null
 
     displayName: string
   }
@@ -119,7 +119,7 @@ export namespace FindUserByUsername {
 
     id: string
 
-    username: string
+    username: string | null
 
     displayName: string
   }

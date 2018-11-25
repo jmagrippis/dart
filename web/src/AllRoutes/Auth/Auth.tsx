@@ -5,6 +5,7 @@ import store from 'store2'
 
 import { AuthContext } from '../../AuthContext'
 import { Loading } from '../../Loading/Loading'
+import { LOCAL_STORAGE_TOKEN_KEY } from '../../constants'
 
 interface Props extends RouteComponentProps {
   auth: WebAuth
@@ -30,12 +31,12 @@ export class Auth extends PureComponent<Props, State> {
         return
       }
 
-      if (!authResult || !authResult.idToken) {
-        this.setState({ err: 'Bad auth result or token.' })
+      if (!authResult || !authResult.accessToken) {
+        this.setState({ err: 'Bad auth result or access token.' })
         return
       }
 
-      store('token', authResult.idToken)
+      store(LOCAL_STORAGE_TOKEN_KEY, authResult.accessToken)
       const { history } = this.props
       history.push('/me')
     })

@@ -39,9 +39,9 @@ export interface AuthenticatedUser extends User {
 
   email: string
 
-  username: string
-
   displayName: string
+
+  username?: string | null
 }
 
 export interface Conversation {

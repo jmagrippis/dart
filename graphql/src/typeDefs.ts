@@ -5,15 +5,15 @@ export const typeDefs = gql`
     id: ID!
   }
 
+  type AnonymousUser implements User {
+    id: ID!
+  }
+
   type AuthenticatedUser implements User {
     id: ID!
     email: String!
-    username: String!
     displayName: String!
-  }
-
-  type AnonymousUser implements User {
-    id: ID!
+    username: String
   }
 
   enum MessageType {

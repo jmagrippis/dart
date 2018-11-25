@@ -7,6 +7,7 @@ import { Loading } from '../../Loading/Loading'
 import { Me } from '../../types'
 import { Login } from '../../Login/Login'
 import { Logout } from '../../Logout/Logout'
+import { Info } from './Info/Info'
 
 class MeQuery extends Query<Me.Query, Me.Variables> {}
 
@@ -38,23 +39,10 @@ export const MePage = () => (
         )
       }
 
-      const { username, email, displayName } = me
-
       return (
-        <DocumentTitle title={`DART - ${username}`}>
+        <DocumentTitle title={`DART - ${me.displayName}`}>
           <div>
-            <div>
-              <div>email:</div>
-              <div data-test="email">{email}</div>
-            </div>
-            <div>
-              <div>username:</div>
-              <div data-test="username">{username}</div>
-            </div>
-            <div>
-              <div>displayName:</div>
-              <div data-test="displayName">{displayName}</div>
-            </div>
+            <Info {...me} />
             <Logout />
           </div>
         </DocumentTitle>
