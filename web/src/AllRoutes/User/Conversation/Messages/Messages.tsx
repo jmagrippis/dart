@@ -33,17 +33,34 @@ const Message = styled.li<{ isOutgoing: boolean }>`
 interface Props {
   messages: Conversation.Messages[]
   interviewerId: string
+  refetch: () => void
 }
 
 export class Messages extends PureComponent<Props> {
   container = createRef<HTMLUListElement>()
 
+  interval: number | undefined
+
   componentDidUpdate(prevProps: Props) {
+    const { messages, interviewerId, refetch } = this.props
     if (
-      prevProps.messages.length !== this.props.messages.length &&
+      prevProps.messages.length !== messages.length &&
       this.container.current
     ) {
       this.container.current.scrollTop = this.container.current.scrollHeight
+    }
+
+    if (
+      !this.interval &&
+      messages[messages.length - 1].sender.id === interviewerId
+    ) {
+      // @ts-ignore
+      this.interval = setInterval(() => refetch(), 1000)
+    }
+
+    if (messages[messages.length - 1].sender.id !== interviewerId) {
+      clearInterval(this.interval)
+      this.interval = undefined
     }
   }
 

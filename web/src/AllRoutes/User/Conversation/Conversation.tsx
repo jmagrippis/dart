@@ -69,9 +69,8 @@ export class Conversation extends PureComponent<Props, State> {
       <ConversationQuery
         query={CONVERSATION}
         variables={{ subjectId, interviewerId }}
-        pollInterval={1000}
       >
-        {({ loading, error, data }) => {
+        {({ loading, error, data, refetch }) => {
           if (loading) return <Loading />
           if (error || !data) return `Error!: ${error}`
 
@@ -80,7 +79,11 @@ export class Conversation extends PureComponent<Props, State> {
           } = data
           return (
             <Container>
-              <Messages messages={messages} interviewerId={interviewerId} />
+              <Messages
+                messages={messages}
+                interviewerId={interviewerId}
+                refetch={refetch}
+              />
               <InputBar
                 conversationId={id}
                 subjectId={subjectId}
