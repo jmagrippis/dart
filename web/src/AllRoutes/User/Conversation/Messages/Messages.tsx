@@ -9,7 +9,7 @@ const Container = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  overflow-y: scroll;
+  overflow-y: auto;
 `
 
 const Message = styled.li<{ isOutgoing: boolean }>`
