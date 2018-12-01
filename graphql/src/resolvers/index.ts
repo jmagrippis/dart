@@ -1,13 +1,25 @@
+import { findUserByEmail } from './findUserByEmail'
 import { findUserByUsername } from './findUserByUsername'
-import { conversation } from './conversation'
-import { addMessage } from './addMessage'
 import { me } from './me'
+import { findTopicsByUserId } from './findTopicsByUserId'
+import { findResponses } from './findResponses'
+import { response } from './response'
+import { conversation } from './conversation'
+
+import { addMessage } from './addMessage'
 
 export const resolvers = {
   Query: {
+    findUserByEmail,
     findUserByUsername,
-    conversation,
-    me
+    me,
+
+    findTopicsByUserId,
+
+    findResponses,
+    response,
+
+    conversation
   },
   Mutation: {
     addMessage
@@ -15,6 +27,11 @@ export const resolvers = {
   User: {
     __resolveType({ email }) {
       return email ? 'AuthenticatedUser' : 'AnonymousUser'
+    }
+  },
+  Response: {
+    __resolveType({ responses }) {
+      return responses ? 'ParentResponse' : 'LeafResponse'
     }
   }
 }

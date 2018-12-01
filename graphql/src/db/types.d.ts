@@ -42,3 +42,20 @@ export interface DbIntent {
     }
   }
 }
+
+export interface DbTopic {
+  id: string
+  user_id: string
+  name: string
+  data: {}
+}
+
+export interface DbResponse {
+  id: string
+  user_id: string
+  topic_id: string
+  name: string
+  data: {
+    content?: string
+  }
+}
