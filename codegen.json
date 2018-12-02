@@ -8,6 +8,10 @@
     "./web/src/types.d.ts": {
       "documents": "web/src/**/*.{ts,tsx}",
       "plugins": ["typescript-common", "typescript-client"]
+    },
+    "./dialogflow/src/types.d.ts": {
+      "documents": "dialogflow/src/**/*.{ts,tsx}",
+      "plugins": ["typescript-common", "typescript-client"]
     }
   }
 }
