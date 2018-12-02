@@ -14,6 +14,42 @@ export type Upload = any
 // Documents
 // ====================================================
 
+export namespace FindResponses {
+  export type Variables = {
+    userId: string
+    topicId: string
+    parentResponseId?: string | null
+  }
+
+  export type Query = {
+    __typename?: 'Query'
+
+    findResponses: FindResponses[]
+  }
+
+  export type FindResponses = {
+    __typename?: LeafResponseInlineFragment['__typename']
+
+    id: string
+
+    name: string
+
+    topic: Topic
+  } & (LeafResponseInlineFragment)
+
+  export type Topic = {
+    __typename?: 'Topic'
+
+    id: string
+  }
+
+  export type LeafResponseInlineFragment = {
+    __typename?: 'LeafResponse'
+
+    content: string
+  }
+}
+
 export namespace FindTopicsByUserId {
   export type Variables = {
     userId: string

@@ -7,5 +7,11 @@ export const findResponses = async (
   const dbResponses = await findBy({ userId, topicId, parentResponseId })
   if (!dbResponses || !dbResponses.length) return []
 
-  return dbResponses
+  return dbResponses.map(({ data, ...restProps }) => ({
+    ...restProps,
+    ...data,
+    topic: {
+      id: restProps.topic_id
+    }
+  }))
 }
