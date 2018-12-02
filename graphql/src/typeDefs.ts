@@ -69,6 +69,7 @@ export const typeDefs = gql`
 
   type Query {
     findUserByEmail(email: String!): AuthenticatedUser
+    findUserByName(givenName: String!, lastName: String!): AuthenticatedUser
     findUserByUsername(username: String!): AuthenticatedUser
     me: AuthenticatedUser
 

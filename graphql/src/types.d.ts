@@ -41,6 +41,8 @@ export interface Response {
 export interface Query {
   findUserByEmail?: AuthenticatedUser | null
 
+  findUserByName?: AuthenticatedUser | null
+
   findUserByUsername?: AuthenticatedUser | null
 
   me?: AuthenticatedUser | null
@@ -136,6 +138,11 @@ export interface LeafResponse extends Response {
 
 export interface FindUserByEmailQueryArgs {
   email: string
+}
+export interface FindUserByNameQueryArgs {
+  givenName: string
+
+  lastName: string
 }
 export interface FindUserByUsernameQueryArgs {
   username: string

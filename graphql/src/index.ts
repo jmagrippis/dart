@@ -6,7 +6,10 @@ import { context } from './context'
 ;(async () => {
   const engine = process.env.ENGINE_API_KEY
     ? {
-        apiKey: process.env.ENGINE_API_KEY
+        apiKey:
+          process.env.NODE_ENV === 'production'
+            ? process.env.ENGINE_API_KEY
+            : undefined
       }
     : undefined
 

@@ -1,4 +1,5 @@
 import { findUserByEmail } from './findUserByEmail'
+import { findUserByName } from './findUserByName'
 import { findUserByUsername } from './findUserByUsername'
 import { me } from './me'
 import { findTopicsByUserId } from './findTopicsByUserId'
@@ -11,6 +12,7 @@ import { addMessage } from './addMessage'
 export const resolvers = {
   Query: {
     findUserByEmail,
+    findUserByName,
     findUserByUsername,
     me,
 

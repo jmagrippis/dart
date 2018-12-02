@@ -7,6 +7,8 @@ const factory = ({ data, ...partial }) => ({
   created_at: faker.date.recent(),
   data: {
     displayName: faker.name.findName(),
+    givenName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
     greeting: faker.lorem.sentences(),
     ...data
   },

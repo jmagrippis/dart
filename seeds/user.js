@@ -6,6 +6,8 @@ const user = userFactory({
   email: 'e2e@example.com',
   data: {
     displayName: 'Johnny',
+    givenName: 'Johnny',
+    lastName: 'Magrippis',
     greeting:
       'Hi! I am the Digital Automated Response Tool for Johnny. How may I help you?'
   }

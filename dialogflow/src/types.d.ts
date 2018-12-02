@@ -53,3 +53,44 @@ export namespace FindUserByEmail {
     displayName: string
   }
 }
+
+export namespace FindUserByName {
+  export type Variables = {
+    givenName: string
+    lastName: string
+  }
+
+  export type Query = {
+    __typename?: 'Query'
+
+    findUserByName: FindUserByName | null
+  }
+
+  export type FindUserByName = {
+    __typename?: 'AuthenticatedUser'
+
+    id: string
+
+    displayName: string
+  }
+}
+
+export namespace FindUserByUsername {
+  export type Variables = {
+    username: string
+  }
+
+  export type Query = {
+    __typename?: 'Query'
+
+    findUserByUsername: FindUserByUsername | null
+  }
+
+  export type FindUserByUsername = {
+    __typename?: 'AuthenticatedUser'
+
+    id: string
+
+    displayName: string
+  }
+}

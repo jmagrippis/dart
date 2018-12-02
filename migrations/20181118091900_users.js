@@ -3,6 +3,7 @@ const USERS = 'users'
 exports.up = function(knex) {
   return knex.schema
     .raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";')
+    .raw('CREATE EXTENSION IF NOT EXISTS "fuzzystrmatch";')
     .createTable(USERS, function(table) {
       table
         .uuid('id')
